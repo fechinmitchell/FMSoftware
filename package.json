@@ -1,0 +1,9 @@
+{
+  "name": "fmsoftware",
+  "version": "1.0.0",
+  "description": "FM Software — Software, Automation & AI studio website",
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm start"
+  }
+}
