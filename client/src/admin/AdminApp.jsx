@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './AdminApp.css';
 import WorkflowBuilder from './WorkflowBuilder';
+import FlowBuilder from './FlowBuilder';
 
 const API = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 const TOKEN_KEY = 'fm_admin_token';
@@ -99,7 +100,8 @@ function Login({ onSignIn }) {
 /* ------------------------------------------------------------------ */
 const TOOLS = [
   { id: 'outreach', label: 'Outreach drafter' },
-  { id: 'workflow', label: 'Workflow builder' },
+  { id: 'workflow', label: 'Workflow list' },
+  { id: 'flow', label: 'Flow canvas' },
 ];
 
 function Dashboard({ token, onSignOut }) {
@@ -124,6 +126,17 @@ function Dashboard({ token, onSignOut }) {
       <main className="admin__main">
         {tool === 'outreach' && <OutreachDrafter token={token} />}
         {tool === 'workflow' && <WorkflowBuilder token={token} />}
+        {tool === 'flow' && (
+          <section className="admin__card">
+            <div className="admin__toolhead">
+              <div>
+                <h2 className="admin__title">Flow canvas</h2>
+                <p className="admin__muted">Drag nodes out, wire them up, run the chain. The wiring sets the order.</p>
+              </div>
+            </div>
+            <FlowBuilder token={token} />
+          </section>
+        )}
       </main>
     </div>
   );

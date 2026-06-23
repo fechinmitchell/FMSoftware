@@ -1,0 +1,129 @@
+/* ==================================================================
+   Flow canvas
+   ================================================================== */
+   .flow__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.9rem;
+  }
+  .flow__palette {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .flow__paltitle {
+    font-size: 0.85rem;
+    color: var(--ink-50);
+  }
+  .flow__palitem {
+    font-family: var(--body);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    border-radius: 8px;
+    padding: 0.4rem 0.7rem;
+    cursor: grab;
+    user-select: none;
+  }
+  .flow__palitem:active { cursor: grabbing; }
+  .flow__palitem--fetch { background: var(--peach); }
+  .flow__palitem--llm { background: var(--sage); }
+  .flow__run { margin-top: 0 !important; width: auto !important; padding-left: 1.4rem; padding-right: 1.4rem; }
+  
+  .flow__wrap {
+    height: 68vh;
+    min-height: 460px;
+    border: 1px solid var(--ink-12);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .flow__hint { margin-top: 0.8rem; font-size: 0.85rem; }
+  
+  /* ---------- nodes ---------- */
+  .fnode {
+    width: 240px;
+    background: var(--surface);
+    border: 1px solid var(--ink-12);
+    border-radius: 12px;
+    padding: 0.7rem 0.8rem 0.8rem;
+    box-shadow: 0 6px 18px rgba(30, 51, 42, 0.08);
+    font-family: var(--body);
+  }
+  .fnode--input { border-color: rgba(30, 51, 42, 0.25); }
+  .fnode__head { display: flex; align-items: center; gap: 0.45rem; margin-bottom: 0.5rem; }
+  .fnode__type {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0.15rem 0.4rem;
+  }
+  .fnode__type--input { background: var(--ink); }
+  .fnode__type--fetch { background: var(--peach); }
+  .fnode__type--llm { background: var(--sage); }
+  
+  .fnode__name {
+    flex: 1;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--ink);
+    background: var(--cream);
+    border: 1px solid var(--ink-12);
+    border-radius: 7px;
+    padding: 0.25rem 0.45rem;
+    min-width: 0;
+  }
+  .fnode__name:focus { outline: none; border-color: var(--sage); }
+  
+  .fnode__field {
+    width: 100%;
+    font-family: var(--body);
+    font-size: 0.82rem;
+    color: var(--ink);
+    background: var(--cream);
+    border: 1px solid var(--ink-12);
+    border-radius: 8px;
+    padding: 0.4rem 0.5rem;
+    margin-bottom: 0.4rem;
+    resize: vertical;
+    line-height: 1.45;
+  }
+  .fnode__field:focus { outline: none; border-color: var(--sage); }
+  
+  .fnode__ref {
+    font-size: 0.72rem;
+    color: var(--ink-50);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  
+  .fnode__result {
+    margin-top: 0.5rem;
+    max-height: 150px;
+    overflow: auto;
+    background: var(--cream-deep);
+    border: 1px solid var(--ink-07);
+    border-radius: 8px;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+  .fnode__result--err { color: var(--clay); background: rgba(201, 123, 90, 0.08); }
+  
+  /* React Flow handles a touch bigger + on-brand */
+  .react-flow__handle {
+    width: 10px;
+    height: 10px;
+    background: var(--sage);
+    border: 2px solid var(--surface);
+  }
+  .react-flow__edge-path { stroke: var(--sage); stroke-width: 2; }
