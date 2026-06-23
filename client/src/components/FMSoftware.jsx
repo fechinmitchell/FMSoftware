@@ -547,6 +547,7 @@ export default function FMSoftware() {
               <a href="https://github.com/fechinmitchell" target="_blank" rel="noopener noreferrer">GitHub</a>
               <a href="https://www.linkedin.com/in/fech%C3%ADn-mitchell/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a href="https://www.fechinmitchell.com" target="_blank" rel="noopener noreferrer">fechinmitchell.com</a>
+              <a href="/tools" className="footer__admin">Admin</a>
             </div>
           </footer>
         </section>
