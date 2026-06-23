@@ -1,11 +1,15 @@
 const express = require('express');
 const cors = require('cors');
+const { router: adminRouter } = require('./auth');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+// Admin auth + internal tools (login, /me, /draft)
+app.use('/api/admin', adminRouter);
 
 // Contact form endpoint
 app.post('/api/contact', (req, res) => {

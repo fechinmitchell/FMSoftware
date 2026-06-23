@@ -1,0 +1,203 @@
+/* ==================================================================
+   FM Software — admin tools
+   Same cream / sage / peach / clay system as the main site.
+   ================================================================== */
+   .admin {
+    --cream: #FAF6F0;
+    --cream-deep: #F3EDE3;
+    --surface: #FFFFFF;
+    --ink: #1E332A;
+    --ink-70: rgba(30, 51, 42, 0.72);
+    --ink-50: rgba(30, 51, 42, 0.5);
+    --ink-12: rgba(30, 51, 42, 0.12);
+    --ink-07: rgba(30, 51, 42, 0.07);
+    --sage: #6B8F71;
+    --sage-deep: #54775B;
+    --peach: #E8A87C;
+    --clay: #C97B5A;
+    --display: 'Fraunces', Georgia, serif;
+    --body: 'Karla', sans-serif;
+    --r: 18px;
+    --shadow: 0 2px 4px rgba(30, 51, 42, 0.04), 0 14px 36px rgba(30, 51, 42, 0.08);
+  
+    min-height: 100vh;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--body);
+  }
+  
+  .admin--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  
+  .admin__brand {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.2px;
+  }
+  .admin__brand span { color: var(--sage); margin: 0 1px; }
+  
+  /* ---------- top bar ---------- */
+  .admin__bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.5rem;
+    background: rgba(250, 246, 240, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--ink-07);
+  }
+  .admin__link {
+    font-size: 0.92rem;
+    color: var(--ink-70);
+    padding: 0.4rem 0.6rem;
+    border-radius: 999px;
+  }
+  .admin__link:hover { color: var(--ink); background: var(--ink-07); }
+  
+  /* ---------- layout ---------- */
+  .admin__main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  
+  /* ---------- card ---------- */
+  .admin__card {
+    background: var(--surface);
+    border: 1px solid var(--ink-07);
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    padding: 1.6rem;
+  }
+  .admin__login { width: min(380px, 92vw); text-align: left; }
+  .admin__login .admin__brand { margin-bottom: 1.2rem; }
+  
+  .admin__title {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.15;
+  }
+  .admin__muted { color: var(--ink-50); font-size: 0.95rem; margin-top: 0.25rem; }
+  
+  .admin__toolhead {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .admin__pill {
+    flex: none;
+    font-size: 0.8rem;
+    color: var(--sage-deep);
+    background: rgba(107, 143, 113, 0.14);
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    white-space: nowrap;
+  }
+  
+  /* ---------- inputs ---------- */
+  .admin__label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-70);
+    margin: 1.1rem 0 0.4rem;
+  }
+  .admin__label span {
+    font-weight: 400;
+    color: var(--ink-50);
+    margin-left: 0.4rem;
+  }
+  .admin__input,
+  .admin__textarea {
+    width: 100%;
+    font-family: var(--body);
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--cream);
+    border: 1px solid var(--ink-12);
+    border-radius: 12px;
+    padding: 0.75rem 0.9rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .admin__login .admin__input { margin-top: 1.2rem; }
+  .admin__textarea { resize: vertical; line-height: 1.5; }
+  .admin__textarea--sm { font-size: 0.9rem; }
+  .admin__input:focus,
+  .admin__textarea:focus {
+    outline: none;
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(107, 143, 113, 0.14);
+  }
+  
+  /* ---------- button ---------- */
+  .admin__btn {
+    margin-top: 1.3rem;
+    width: 100%;
+    font-family: var(--body);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--sage);
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    transition: background 0.2s, transform 0.05s;
+  }
+  .admin__btn:hover:not(:disabled) { background: var(--sage-deep); }
+  .admin__btn:active:not(:disabled) { transform: translateY(1px); }
+  .admin__btn:disabled { opacity: 0.5; cursor: default; }
+  
+  .admin__error {
+    color: var(--clay);
+    font-size: 0.9rem;
+    margin-top: 0.7rem;
+  }
+  
+  /* ---------- results ---------- */
+  .admin__results { margin-top: 1.6rem; }
+  .admin__field { margin-bottom: 1.3rem; }
+  .admin__fieldhead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+  .admin__fieldhead .admin__label { margin: 0; }
+  .admin__output {
+    background: var(--cream-deep);
+    border: 1px solid var(--ink-07);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    font-size: 0.96rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+  }
+  .admin__output--big { min-height: 120px; }
+  .admin__ideas {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+  .admin__ideas li { margin-bottom: 0.3rem; }
+  
+  .admin__copy {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--sage-deep);
+    background: rgba(107, 143, 113, 0.14);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+  }
+  .admin__copy:hover { background: rgba(107, 143, 113, 0.24); }
