@@ -3,15 +3,19 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { router: adminRouter } = require('./auth');
+const agentRouter = require('./agent');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
 
 // Admin auth + internal tools (login, /me, /draft)
 app.use('/api/admin', adminRouter);
+
+// Agentic workflow runner (/run)
+app.use('/api/admin/workflow', agentRouter);
 
 // Contact form endpoint
 app.post('/api/contact', (req, res) => {

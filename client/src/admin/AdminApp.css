@@ -49,6 +49,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     padding: 0.9rem 1.5rem;
     background: rgba(250, 246, 240, 0.85);
     backdrop-filter: blur(12px);
@@ -62,6 +63,22 @@
     border-radius: 999px;
   }
   .admin__link:hover { color: var(--ink); background: var(--ink-07); }
+  
+  /* ---------- tabs ---------- */
+  .admin__tabs { display: flex; gap: 0.4rem; flex: 1; justify-content: center; }
+  .admin__tab {
+    font-family: var(--body);
+    font-size: 0.92rem;
+    color: var(--ink-70);
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+  }
+  .admin__tab:hover { background: var(--ink-07); }
+  .admin__tab--on {
+    color: #fff;
+    background: var(--sage);
+  }
+  .admin__tab--on:hover { background: var(--sage-deep); }
   
   /* ---------- layout ---------- */
   .admin__main {
@@ -184,6 +201,7 @@
     white-space: pre-wrap;
   }
   .admin__output--big { min-height: 120px; }
+  .admin__output--err { color: var(--clay); background: rgba(201, 123, 90, 0.08); }
   .admin__ideas {
     margin: 0;
     padding-left: 1.1rem;
@@ -201,3 +219,78 @@
     padding: 0.3rem 0.7rem;
   }
   .admin__copy:hover { background: rgba(107, 143, 113, 0.24); }
+  .admin__copy:disabled { opacity: 0.4; cursor: default; }
+  
+  /* ==================================================================
+     Workflow builder
+     ================================================================== */
+  .wf__steps { margin-top: 0.6rem; }
+  .wf__step {
+    border: 1px solid var(--ink-12);
+    border-radius: 14px;
+    padding: 1rem;
+    margin-top: 0.9rem;
+    background: var(--cream);
+  }
+  .wf__stephead {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .wf__badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.2rem 0.45rem;
+  }
+  .wf__badge--llm { background: var(--sage); }
+  .wf__badge--fetch { background: var(--peach); }
+  .wf__name {
+    flex: 1;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--ink-12);
+    border-radius: 8px;
+    padding: 0.35rem 0.55rem;
+  }
+  .wf__name:focus { outline: none; border-color: var(--sage); }
+  .wf__stepbtns { display: flex; gap: 0.3rem; }
+  .wf__refs {
+    font-size: 0.78rem;
+    color: var(--ink-50);
+    margin: 0.5rem 0 0.2rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .wf__add { display: flex; gap: 0.5rem; margin-top: 0.9rem; }
+  .wf__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.3rem;
+  }
+  .wf__actions .admin__btn { margin-top: 0; flex: 1; }
+  .wf__saved { margin-top: 1.8rem; padding-top: 1.2rem; border-top: 1px solid var(--ink-07); }
+  .wf__savedrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .wf__savedname {
+    flex: 1;
+    text-align: left;
+    font-family: var(--body);
+    font-size: 0.95rem;
+    color: var(--sage-deep);
+    background: var(--cream-deep);
+    border-radius: 8px;
+    padding: 0.5rem 0.7rem;
+  }
+  .wf__savedname:hover { background: rgba(107, 143, 113, 0.16); }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './AdminApp.css';
+import WorkflowBuilder from './WorkflowBuilder';
 
 const API = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 const TOKEN_KEY = 'fm_admin_token';
@@ -16,7 +17,6 @@ export default function AdminApp() {
   const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY) || '');
   const [checking, setChecking] = useState(true);
 
-  // verify a stored token on boot, drop it if stale
   useEffect(() => {
     if (!token) { setChecking(false); return; }
     fetch(`${API}/api/admin/me`, {
@@ -97,15 +97,33 @@ function Login({ onSignIn }) {
 /* ------------------------------------------------------------------ */
 /*  Dashboard                                                         */
 /* ------------------------------------------------------------------ */
+const TOOLS = [
+  { id: 'outreach', label: 'Outreach drafter' },
+  { id: 'workflow', label: 'Workflow builder' },
+];
+
 function Dashboard({ token, onSignOut }) {
+  const [tool, setTool] = useState('outreach');
   return (
     <div className="admin">
       <header className="admin__bar">
         <div className="admin__brand">FM<span>·</span>Software</div>
+        <nav className="admin__tabs">
+          {TOOLS.map((t) => (
+            <button
+              key={t.id}
+              className={`admin__tab ${tool === t.id ? 'admin__tab--on' : ''}`}
+              onClick={() => setTool(t.id)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </nav>
         <button className="admin__link" onClick={onSignOut}>Sign out</button>
       </header>
       <main className="admin__main">
-        <OutreachDrafter token={token} />
+        {tool === 'outreach' && <OutreachDrafter token={token} />}
+        {tool === 'workflow' && <WorkflowBuilder token={token} />}
       </main>
     </div>
   );
