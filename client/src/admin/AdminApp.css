@@ -86,6 +86,7 @@
     margin: 0 auto;
     padding: 2rem 1.5rem 4rem;
   }
+  .admin__main--wide { max-width: 1240px; }
   
   /* ---------- card ---------- */
   .admin__card {
@@ -294,3 +295,286 @@
     padding: 0.5rem 0.7rem;
   }
   .wf__savedname:hover { background: rgba(107, 143, 113, 0.16); }
+  
+  /* ==================================================================
+     Run library — list + modal
+     ================================================================== */
+  .runs { display: flex; flex-direction: column; gap: 0.5rem; }
+  .runs__row {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.8rem 1rem; border: 1px solid var(--ink-12); border-radius: 12px; background: var(--cream);
+  }
+  .runs__meta { min-width: 0; }
+  .runs__name { font-family: var(--display); font-weight: 600; font-size: 1.02rem; display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap; }
+  .runs__tag { font-family: var(--body); font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--sage-deep); background: rgba(107,143,113,0.16); border-radius: 999px; padding: 0.12rem 0.45rem; }
+  .runs__sub { font-size: 0.8rem; color: var(--ink-50); margin-top: 0.15rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .runs__rowbtns { display: flex; align-items: center; gap: 0.5rem; flex: none; }
+  .runs__dot { width: 8px; height: 8px; border-radius: 50%; }
+  .runs__dot--ok { background: var(--sage); }
+  .runs__dot--err { background: var(--clay); }
+  .runs__view { font-family: var(--body); font-size: 0.85rem; font-weight: 600; color: var(--ink-70); background: var(--ink-07); border-radius: 9px; padding: 0.5rem 0.85rem; }
+  .runs__view:hover:not(:disabled) { background: var(--ink-12); color: var(--ink); }
+  .runs__view:disabled { opacity: 0.4; cursor: default; }
+  .runs__run { margin-top: 0 !important; width: auto !important; padding: 0.5rem 1.25rem !important; font-size: 0.9rem; }
+  
+  /* modal */
+  .modal__backdrop {
+    position: fixed; inset: 0; z-index: 50; padding: 1.5rem;
+    background: rgba(30, 51, 42, 0.4); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal__card {
+    width: min(680px, 100%); max-height: 85vh; overflow: auto;
+    background: var(--surface); border-radius: 18px; padding: 1.4rem 1.5rem;
+    box-shadow: 0 20px 60px rgba(30, 51, 42, 0.3);
+  }
+  .modal__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.4rem; }
+  .modal__close { font-size: 1.5rem; line-height: 1; color: var(--ink-50); padding: 0.1rem 0.45rem; border-radius: 8px; }
+  .modal__close:hover { background: var(--ink-07); color: var(--ink); }
+  
+  /* ==================================================================
+     Command Center
+     ================================================================== */
+  .mc__costwrap { display: flex; flex-direction: column; align-items: flex-end; gap: 0.05rem; flex: none; }
+  .mc__costlabel { font-size: 0.72rem; color: var(--ink-50); }
+  .mc__cost { font-family: var(--display); font-weight: 600; font-size: 1.35rem; color: var(--sage-deep); }
+  .mc__reset { font-size: 0.72rem; color: var(--ink-50); }
+  .mc__reset:hover { color: var(--ink); text-decoration: underline; }
+  
+  .mc__profilebar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--cream-deep); border-radius: 10px; padding: 0.6rem 0.8rem; margin-bottom: 0.4rem; flex-wrap: wrap; }
+  
+  .mc__goalrow { display: flex; gap: 0.6rem; align-items: center; margin-top: 0.6rem; flex-wrap: wrap; }
+  .mc__model { width: auto !important; min-width: 175px; margin-bottom: 0 !important; }
+  .mc__assemble { margin-top: 0 !important; width: auto !important; padding-left: 1.4rem; padding-right: 1.4rem; background: var(--clay); }
+  .mc__assemble:hover:not(:disabled) { background: #b56a4b; }
+  
+  .mc__summary { display: flex; flex-direction: column; gap: 0.3rem; background: rgba(107,143,113,0.1); border: 1px solid rgba(107,143,113,0.25); border-radius: 12px; padding: 0.9rem 1rem; margin-top: 1.2rem; }
+  .mc__commander { font-weight: 700; font-size: 0.78rem; color: var(--sage-deep); text-transform: uppercase; letter-spacing: 0.05em; }
+  .mc__summary p { font-size: 0.96rem; line-height: 1.55; }
+  
+  .mc__team { display: grid; gap: 1rem; margin-top: 1.2rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .mc__agent { border: 1px solid var(--ink-12); border-radius: 14px; padding: 1rem; background: var(--cream); }
+  .mc__agenthead { display: flex; align-items: center; gap: 0.5rem; }
+  .mc__emoji { font-size: 1.3rem; line-height: 1; }
+  .mc__name { font-family: var(--display); font-weight: 600; font-size: 1.05rem; flex: 1; }
+  .mc__agentcost { font-size: 0.74rem; color: var(--sage-deep); background: rgba(107,143,113,0.14); border-radius: 999px; padding: 0.12rem 0.45rem; }
+  .mc__role { font-size: 0.88rem; color: var(--ink-70); line-height: 1.5; margin: 0.4rem 0 0.7rem; }
+  .mc__controls { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+  .mc__controls .fnode__model { width: auto; min-width: 120px; margin-bottom: 0; }
+  .mc__toggle { font-size: 0.82rem; color: var(--ink-70); display: flex; align-items: center; gap: 0.35rem; cursor: pointer; }
+  .mc__run { margin-top: 0.5rem !important; }
+  .mc__result { margin-top: 0.7rem; max-height: 340px; overflow: auto; }
+  .mc__sources { display: flex; flex-direction: column; gap: 0.25rem; }
+  .mc__source { font-size: 0.82rem; color: var(--sage-deep); text-decoration: underline; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  
+  /* Command Center — editing additions */
+  .mc__topbar { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+  .mc__status { font-size: 0.83rem; color: var(--sage-deep); margin-left: auto; }
+  .mc__runall { margin-top: 0 !important; width: auto !important; padding-left: 1.3rem; padding-right: 1.3rem; }
+  
+  .mc__agent--off { opacity: 0.55; }
+  .mc__agent--busy { border-color: var(--sage); box-shadow: 0 0 0 3px rgba(107,143,113,0.2); }
+  .mc__emojiin { width: 2.2rem; text-align: center; font-size: 1.15rem; background: var(--cream); border: 1px solid var(--ink-12); border-radius: 8px; padding: 0.2rem; }
+  .mc__emojiin:focus { outline: none; border-color: var(--sage); }
+  .mc__namein { flex: 1; min-width: 0; font-family: var(--display); font-weight: 600; font-size: 1.02rem; color: var(--ink); background: var(--cream); border: 1px solid var(--ink-12); border-radius: 8px; padding: 0.25rem 0.5rem; }
+  .mc__namein:focus { outline: none; border-color: var(--sage); }
+  
+  .mc__rowbtns { display: flex; align-items: center; gap: 0.3rem; margin: 0.5rem 0; flex-wrap: wrap; }
+  .mc__roledetails { margin: 0.3rem 0 0.5rem; }
+  .mc__roledetails summary { font-size: 0.82rem; font-weight: 600; color: var(--ink-70); cursor: pointer; padding: 0.2rem 0; }
+  .mc__roledetails summary:hover { color: var(--ink); }
+  .mc__handle { font-size: 0.72rem; color: var(--ink-50); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0.2rem 0 0.4rem; line-height: 1.4; }
+  .mc__handle b { color: var(--sage-deep); font-weight: 700; }
+  
+  /* Command Center — enhance, analyst, result tools, handle chips */
+  .mc__enhancerow { display: flex; align-items: center; gap: 0.7rem; margin-top: 0.5rem; flex-wrap: wrap; }
+  .mc__enhance { background: rgba(201,123,90,0.12); color: var(--clay); }
+  .mc__enhance:hover:not(:disabled) { background: rgba(201,123,90,0.2); }
+  
+  .mc__chip { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.7rem; color: var(--sage-deep); background: rgba(107,143,113,0.16); border-radius: 6px; padding: 0.1rem 0.35rem; margin: 0 0.15rem; }
+  .mc__chip:hover { background: rgba(107,143,113,0.3); }
+  
+  .mc__resultwrap { margin-top: 0.6rem; }
+  .mc__resulthead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.3rem; }
+  .mc__resultbtns { display: flex; gap: 0.3rem; }
+  .mc__result { margin-top: 0; }
+  
+  .mc__analyst { margin-top: 1.6rem; border: 1px solid rgba(107,143,113,0.3); background: rgba(107,143,113,0.06); border-radius: 16px; padding: 1.2rem 1.3rem; }
+  .mc__analysthead { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.2rem; }
+  .mc__quickasks { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.7rem 0; }
+  .mc__quickasks .flow__libcard:disabled { opacity: 0.5; cursor: default; }
+  
+  /* Command Center — two-row cost meter (this mission + all missions) */
+  .mc__costwrap { gap: 0.1rem; }
+  .mc__costrow { display: flex; align-items: baseline; justify-content: flex-end; gap: 0.5rem; }
+  .mc__costrow .mc__cost { font-size: 1.2rem; }
+  .mc__costrow--total { margin-top: 0.15rem; padding-top: 0.25rem; border-top: 1px solid var(--ink-12); }
+  .mc__cost--total { color: var(--clay); }
+  
+  /* Command Center — Outbox */
+  .mc__outbox { margin-top: 1.6rem; border: 1px solid rgba(201,123,90,0.3); background: rgba(201,123,90,0.05); border-radius: 16px; padding: 1.2rem 1.3rem; }
+  .mc__outlist { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 0.8rem; }
+  .mc__outitem { border: 1px solid var(--ink-12); border-radius: 12px; padding: 0.8rem 0.9rem; background: var(--cream); }
+  .mc__outitem--sent { opacity: 0.5; }
+  .mc__outtop { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .mc__chanbadge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 999px; padding: 0.15rem 0.5rem; }
+  .mc__chanbadge--email { color: var(--sage-deep); background: rgba(107,143,113,0.16); }
+  .mc__chanbadge--linkedin { color: #2563eb; background: rgba(37,99,235,0.12); }
+  .mc__outname { font-family: var(--display); font-weight: 600; font-size: 1rem; }
+  .mc__outmeta { font-size: 0.8rem; color: var(--ink-50); margin-top: 0.3rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .mc__outbody { font-size: 0.9rem; line-height: 1.55; color: var(--ink-70); white-space: pre-wrap; margin: 0.5rem 0 0.7rem; }
+  .mc__outactions { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .mc__send { margin-top: 0 !important; width: auto !important; padding-left: 1.1rem; padding-right: 1.1rem; text-decoration: none; display: inline-flex; align-items: center; }
+  .mc__nomail { font-size: 0.8rem; color: var(--clay); }
+  
+  /* Command Center — Critique & learn */
+  .mc__learn { margin-top: 1.6rem; border: 1px solid rgba(90,90,140,0.28); background: rgba(90,90,140,0.05); border-radius: 16px; padding: 1.2rem 1.3rem; }
+  
+  /* Command Center — generated goals */
+  .mc__gengoals { background: rgba(107,143,113,0.12); color: var(--sage-deep); }
+  .mc__gengoals:hover:not(:disabled) { background: rgba(107,143,113,0.22); }
+  .mc__goalideas { margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.4rem; background: var(--cream-deep); border-radius: 12px; padding: 0.8rem 0.9rem; }
+  .mc__goalideashead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.1rem; }
+  .mc__goalidea { text-align: left; font-size: 0.92rem; line-height: 1.45; color: var(--ink); background: var(--cream); border: 1px solid var(--ink-12); border-radius: 10px; padding: 0.6rem 0.75rem; transition: border-color 0.15s, background 0.15s; }
+  .mc__goalidea:hover { border-color: var(--sage); background: rgba(107,143,113,0.08); }
+  
+  /* Command Center — typed deliverables + stop */
+  .mc__stop { color: var(--clay); border-color: rgba(201,123,90,0.4); }
+  .mc__stop:hover { background: rgba(201,123,90,0.12); }
+  .mc__chanbadge--advice { color: #7c5cbf; background: rgba(124,92,191,0.12); }
+  .mc__chanbadge--code { color: #c2410c; background: rgba(194,65,12,0.12); }
+  .mc__chanbadge--task { color: var(--ink-70); background: var(--ink-08); }
+  .mc__code { margin: 0.5rem 0 0.7rem; background: #1f2430; color: #e6e6e6; border-radius: 10px; padding: 0.8rem 0.9rem; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.82rem; line-height: 1.5; white-space: pre; }
+  .mc__code code { background: none; padding: 0; color: inherit; }
+  
+  /* Command Center — pitch steer */
+  .mc__pitchrow { display: flex; gap: 0.6rem; align-items: center; margin-top: 0.5rem; flex-wrap: wrap; }
+  .mc__steer { flex: 1; min-width: 220px; font-family: inherit; font-size: 0.92rem; color: var(--ink); background: var(--cream); border: 1px solid var(--ink-12); border-radius: 10px; padding: 0.55rem 0.7rem; }
+  .mc__steer:focus { outline: none; border-color: var(--sage); }
+  .mc__steer::placeholder { color: var(--ink-40); }
+  
+  /* Command Center — pixel office on agent cards */
+  .mc__office { position: relative; margin-bottom: 0.7rem; border-radius: 10px; overflow: hidden; }
+  .mc__reroll { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 999px; background: rgba(0,0,0,0.45); color: #fff; font-size: 0.9rem; line-height: 1; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s, transform 0.2s; }
+  .mc__office:hover .mc__reroll { opacity: 1; }
+  .mc__reroll:hover { transform: rotate(90deg); background: rgba(0,0,0,0.65); }
+  
+  /* Command Center — shared overhead office */
+  .mc__floorpanel { margin-top: 1.2rem; border: 1px solid var(--ink-12); border-radius: 14px; overflow: hidden; background: #d8c7a8; }
+  .mc__floorhead { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.8rem; background: var(--cream); border-bottom: 1px solid var(--ink-12); }
+  .mc__floortitle { font-family: var(--display); font-weight: 600; font-size: 0.98rem; }
+  .mc__canvas { display: block; width: 100%; height: auto; image-rendering: pixelated; image-rendering: crisp-edges; }
+  
+  /* Command Center — single-agent stop button */
+  .mc__stopbtn { background: var(--clay) !important; }
+  .mc__stopbtn:hover { background: #b56a4b !important; }
+  
+  /* Command Center — declutter pass: clamped outputs, compact cards, collapsible panels */
+  .mc__result--clamp {
+    max-height: none;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .mc__cardicons { display: flex; align-items: center; gap: 0.2rem; margin-left: auto; }
+  .mc__cardicons .fnode__copy { padding: 0.12rem 0.42rem; line-height: 1.4; }
+  
+  .mc__panelhead { display: flex; align-items: center; gap: 0.5rem; }
+  .mc__paneltoggle {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: none; border: none; padding: 0.15rem 0; margin: 0;
+    cursor: pointer; color: inherit; text-align: left; flex: 1; min-width: 0;
+  }
+  .mc__paneltoggle:hover .mc__paneltitle { text-decoration: underline; }
+  .mc__paneltitle { font-family: var(--display); font-weight: 700; font-size: 1.18rem; color: var(--ink); }
+  .mc__chev { color: var(--ink-50); font-size: 0.85rem; }
+  .mc__panelbody { margin-top: 0.6rem; }
+  
+  /* tighter empty state inside collapsible panels */
+  .mc__panelbody > .admin__muted:only-child { margin: 0.2rem 0 0; }
+  
+  /* Command Center — per-agent run timer */
+  .mc__agenttime {
+    font-size: 0.78rem;
+    color: var(--ink-50);
+    font-variant-numeric: tabular-nums;
+    background: var(--ink-07);
+    padding: 0.08rem 0.4rem;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .mc__agenttime--live { color: var(--sage); background: rgba(107, 143, 113, 0.12); }
+  
+  /* Command Center — saved-mission manager + one-click pipeline runner */
+  .mc__missions { max-height: 60vh; overflow-y: auto; }
+  .mc__mshead { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin-bottom: 0.6rem; }
+  
+  .mc__msrow { border: 1px solid var(--ink-12); background: var(--cream); border-radius: 12px; padding: 0.6rem 0.7rem; margin-bottom: 0.55rem; }
+  .mc__msrow--live { border-color: var(--sage); background: rgba(107, 143, 113, 0.06); }
+  .mc__mstop { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+  .mc__msname { display: flex; align-items: center; gap: 0.4rem; background: none; border: none; cursor: pointer; padding: 0.1rem 0; font-family: var(--display); font-weight: 700; font-size: 1.02rem; color: var(--ink); text-align: left; }
+  .mc__msname:hover { text-decoration: underline; }
+  .mc__msmeta { font-size: 0.8rem; color: var(--ink-50); font-variant-numeric: tabular-nums; }
+  .mc__msbtns { display: flex; align-items: center; gap: 0.4rem; margin-left: auto; flex-wrap: wrap; }
+  .mc__msbtn { width: auto !important; margin: 0 !important; padding: 0.32rem 0.7rem !important; font-size: 0.82rem !important; }
+  
+  .mc__mslog { margin-top: 0.55rem; background: var(--cream-deep); border: 1px solid var(--ink-07); border-radius: 9px; padding: 0.5rem 0.65rem; display: flex; flex-direction: column; gap: 0.15rem; }
+  .mc__mslogline { font-size: 0.84rem; line-height: 1.45; color: var(--ink-70); font-variant-numeric: tabular-nums; }
+  .mc__mslogline--agent { color: var(--sage-deep); font-weight: 600; }
+  .mc__mslogline--done, .mc__mslogline--finish { color: var(--sage-deep); }
+  .mc__mslogline--analyst, .mc__mslogline--learn { color: #5A5A8C; font-weight: 600; }
+  .mc__mslogline--deliver { color: var(--clay); font-weight: 600; }
+  .mc__mslogline--stop { color: var(--clay); }
+  .mc__mslogline--error { color: #B5503F; font-weight: 600; }
+  
+  .mc__msagents { margin-top: 0.55rem; padding-top: 0.55rem; border-top: 1px dashed var(--ink-12); }
+  .mc__msagent { display: flex; align-items: center; gap: 0.5rem; padding: 0.18rem 0; }
+  .mc__msagent--off { opacity: 0.5; }
+  .mc__msemoji { font-size: 1.05rem; }
+  .mc__msaname { font-weight: 600; color: var(--ink); font-size: 0.94rem; }
+  .mc__msamodel { font-size: 0.78rem; color: var(--ink-50); margin-left: auto; }
+  
+  .mc__msresmeta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.7rem; }
+  .mc__halbadge { font-size: 0.74rem; color: #5A5A8C; background: rgba(90, 90, 140, 0.12); padding: 0.1rem 0.45rem; border-radius: 6px; font-weight: 600; }
+  .mc__msdetails > summary { cursor: pointer; color: var(--ink-70); font-size: 0.9rem; }
+  
+  .modal__card--wide { max-width: 780px; width: 94%; }
+  
+  /* Command Center — Analyst suggested questions header */
+  .mc__askshead { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin: 0.7rem 0 0.35rem; }
+  
+  /* Command Center — save-mission modal input */
+  .mc__saveinput { width: 100%; box-sizing: border-box; font-size: 1rem; color: var(--ink); background: var(--cream); border: 1px solid var(--ink-12); border-radius: 10px; padding: 0.65rem 0.85rem; font-family: inherit; }
+  .mc__saveinput:focus { outline: none; border-color: var(--sage); }
+  
+  /* Command Center — per-mission run history */
+  .mc__runlist { display: flex; flex-direction: column; gap: 0.4rem; }
+  .mc__runrow { display: flex; align-items: center; gap: 0.7rem; width: 100%; text-align: left; background: var(--cream); border: 1px solid var(--ink-12); border-radius: 10px; padding: 0.55rem 0.75rem; cursor: pointer; }
+  .mc__runrow:hover { border-color: var(--sage); background: rgba(107, 143, 113, 0.05); }
+  .mc__runrow--live { border-color: var(--sage); background: rgba(107, 143, 113, 0.08); }
+  .mc__rundate { font-family: var(--display); font-weight: 700; color: var(--ink); font-size: 0.94rem; }
+  .mc__runmeta { display: flex; align-items: center; gap: 0.4rem; margin-left: auto; }
+  
+  /* Command Center — per-run budget cap */
+  .mc__budget { display: inline-flex; align-items: center; gap: 0.25rem; border: 1px solid var(--ink-12); background: var(--cream); border-radius: 10px; padding: 0 0.5rem; height: 38px; }
+  .mc__budgetsign { color: var(--ink-50); font-weight: 600; }
+  .mc__budget input { width: 64px; border: none; background: transparent; font-size: 0.95rem; color: var(--ink); font-family: inherit; padding: 0.3rem 0; }
+  .mc__budget input:focus { outline: none; }
+  .mc__budgetwrap { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; }
+  .mc__budgetbar { flex: 1; height: 6px; background: var(--ink-12); border-radius: 999px; overflow: hidden; }
+  .mc__budgetfill { height: 100%; background: var(--sage); border-radius: 999px; transition: width 0.2s ease; }
+  .mc__budgetnum { font-size: 0.78rem; color: var(--ink-50); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  
+  /* Command Center — agent picker modal */
+  .mc__agentpicker { display: grid; grid-template-columns: repeat(auto-fill, minmax(205px, 1fr)); gap: 0.6rem; margin-top: 0.5rem; max-height: 62vh; overflow-y: auto; padding: 0.15rem; }
+  .mc__pick { display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; text-align: left; padding: 0.75rem; border: 1px solid var(--ink-12); border-radius: 12px; background: var(--cream); cursor: pointer; transition: border-color 0.15s ease, transform 0.05s ease; }
+  .mc__pick:hover { border-color: var(--sage); }
+  .mc__pick:active { transform: translateY(1px); }
+  .mc__pick--blank { border-style: dashed; }
+  .mc__pickemoji { font-size: 1.4rem; line-height: 1; }
+  .mc__pickname { font-weight: 650; color: var(--ink); }
+  .mc__pickrole { font-size: 0.8rem; color: var(--ink-70); line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .mc__pickmeta { display: flex; gap: 0.3rem; margin-top: 0.2rem; }
+  .mc__pickbadge { font-size: 0.7rem; padding: 0.12rem 0.45rem; border-radius: 999px; background: var(--ink-07); color: var(--ink-70); }
+  .mc__pickbadge--web { background: var(--sage); color: #fff; }

@@ -1,0 +1,29 @@
+.po {
+    width: 100%;
+    height: auto;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    border-radius: 10px;
+    background: #00000008;
+  }
+  .po rect,
+  .po path,
+  .po text { shape-rendering: crispEdges; }
+  
+  @keyframes po-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1px); } }
+  @keyframes po-type { from { transform: translateY(0); } to { transform: translateY(-1.4px); } }
+  @keyframes po-flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.65; } }
+  @keyframes po-floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+  
+  .po-char, .po-arm, .po-bubble, .po-screen { transform-box: fill-box; transform-origin: center; }
+  
+  .po--idle .po-char { animation: po-bob 2.6s ease-in-out infinite; }
+  .po--busy .po-arm { animation: po-type 0.42s steps(2) infinite alternate; }
+  .po--busy .po-screen { animation: po-flicker 0.9s steps(2) infinite; }
+  .po--busy .po-bubble,
+  .po--done .po-bubble { animation: po-floaty 2s ease-in-out infinite; }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .po-char, .po-arm, .po-screen, .po-bubble { animation: none !important; }
+  }

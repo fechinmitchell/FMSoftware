@@ -1,129 +1,86 @@
 /* ==================================================================
    Flow canvas
    ================================================================== */
-   .flow__bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.9rem;
-  }
-  .flow__palette {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .flow__paltitle {
-    font-size: 0.85rem;
-    color: var(--ink-50);
-  }
-  .flow__palitem {
-    font-family: var(--body);
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #fff;
-    border-radius: 8px;
-    padding: 0.4rem 0.7rem;
-    cursor: grab;
-    user-select: none;
-  }
-  .flow__palitem:active { cursor: grabbing; }
-  .flow__palitem--fetch { background: var(--peach); }
-  .flow__palitem--llm { background: var(--sage); }
-  .flow__run { margin-top: 0 !important; width: auto !important; padding-left: 1.4rem; padding-right: 1.4rem; }
-  
-  .flow__wrap {
-    height: 68vh;
-    min-height: 460px;
-    border: 1px solid var(--ink-12);
-    border-radius: 14px;
-    overflow: hidden;
-    background: var(--cream);
-  }
-  .flow__hint { margin-top: 0.8rem; font-size: 0.85rem; }
-  
-  /* ---------- nodes ---------- */
-  .fnode {
-    width: 240px;
-    background: var(--surface);
-    border: 1px solid var(--ink-12);
-    border-radius: 12px;
-    padding: 0.7rem 0.8rem 0.8rem;
-    box-shadow: 0 6px 18px rgba(30, 51, 42, 0.08);
-    font-family: var(--body);
-  }
-  .fnode--input { border-color: rgba(30, 51, 42, 0.25); }
-  .fnode__head { display: flex; align-items: center; gap: 0.45rem; margin-bottom: 0.5rem; }
-  .fnode__type {
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #fff;
-    border-radius: 5px;
-    padding: 0.15rem 0.4rem;
-  }
-  .fnode__type--input { background: var(--ink); }
-  .fnode__type--fetch { background: var(--peach); }
-  .fnode__type--llm { background: var(--sage); }
-  
-  .fnode__name {
-    flex: 1;
-    font-family: var(--body);
-    font-weight: 600;
-    font-size: 0.88rem;
-    color: var(--ink);
-    background: var(--cream);
-    border: 1px solid var(--ink-12);
-    border-radius: 7px;
-    padding: 0.25rem 0.45rem;
-    min-width: 0;
-  }
-  .fnode__name:focus { outline: none; border-color: var(--sage); }
-  
-  .fnode__field {
-    width: 100%;
-    font-family: var(--body);
-    font-size: 0.82rem;
-    color: var(--ink);
-    background: var(--cream);
-    border: 1px solid var(--ink-12);
-    border-radius: 8px;
-    padding: 0.4rem 0.5rem;
-    margin-bottom: 0.4rem;
-    resize: vertical;
-    line-height: 1.45;
-  }
-  .fnode__field:focus { outline: none; border-color: var(--sage); }
-  
-  .fnode__ref {
-    font-size: 0.72rem;
-    color: var(--ink-50);
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  }
-  
-  .fnode__result {
-    margin-top: 0.5rem;
-    max-height: 150px;
-    overflow: auto;
-    background: var(--cream-deep);
-    border: 1px solid var(--ink-07);
-    border-radius: 8px;
-    padding: 0.5rem 0.6rem;
-    font-size: 0.8rem;
-    line-height: 1.5;
-    white-space: pre-wrap;
-  }
-  .fnode__result--err { color: var(--clay); background: rgba(201, 123, 90, 0.08); }
-  
-  /* React Flow handles a touch bigger + on-brand */
-  .react-flow__handle {
-    width: 10px;
-    height: 10px;
-    background: var(--sage);
-    border: 2px solid var(--surface);
-  }
-  .react-flow__edge-path { stroke: var(--sage); stroke-width: 2; }
+   .flow__gen { display: flex; gap: 0.6rem; margin-bottom: 0.9rem; }
+   .flow__geninput { flex: 1; }
+   .flow__genbtn { margin-top: 0 !important; width: auto !important; white-space: nowrap; padding-left: 1.3rem; padding-right: 1.3rem; background: var(--clay); }
+   .flow__genbtn:hover:not(:disabled) { background: #b56a4b; }
+   
+   .flow__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+   .flow__palette { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
+   .flow__paltitle { font-size: 0.85rem; color: var(--ink-50); }
+   .flow__palitem { font-family: var(--body); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; border-radius: 8px; padding: 0.4rem 0.65rem; cursor: grab; user-select: none; }
+   .flow__palitem:active { cursor: grabbing; }
+   .flow__palitem--fetch { background: var(--peach); }
+   .flow__palitem--llm { background: var(--sage); }
+   .flow__palitem--template { background: var(--ink); }
+   .flow__help { font-family: var(--body); font-size: 0.82rem; color: var(--ink-70); background: var(--ink-07); border-radius: 8px; padding: 0.4rem 0.65rem; }
+   .flow__help:hover { background: var(--ink-12); }
+   
+   .flow__actions { display: flex; align-items: center; gap: 0.5rem; }
+   .flow__ghost { font-family: var(--body); font-size: 0.9rem; font-weight: 600; color: var(--ink-70); background: var(--ink-07); border-radius: 10px; padding: 0.55rem 0.95rem; }
+   .flow__ghost:hover { background: var(--ink-12); color: var(--ink); }
+   .flow__run { margin-top: 0 !important; width: auto !important; padding-left: 1.4rem; padding-right: 1.4rem; }
+   .flow__stop { margin-top: 0 !important; width: auto !important; padding-left: 1.6rem; padding-right: 1.6rem; background: var(--clay); }
+   .flow__stop:hover { background: #b56a4b; }
+   
+   .flow__status { font-size: 0.85rem; color: var(--sage-deep); margin: 0.2rem 0 0.6rem; }
+   
+   /* help / library panel */
+   .flow__helppanel { background: var(--cream-deep); border: 1px solid var(--ink-07); border-radius: 12px; padding: 1rem 1.1rem; margin-bottom: 0.9rem; }
+   .flow__cat { display: grid; grid-template-columns: 130px 1fr auto; gap: 0.8rem; align-items: baseline; padding: 0.4rem 0; border-top: 1px solid var(--ink-07); }
+   .flow__cat:first-of-type { border-top: none; }
+   .flow__catname { font-weight: 700; font-size: 0.9rem; }
+   .flow__catdetail { font-size: 0.88rem; color: var(--ink-70); }
+   .flow__catstatus { font-size: 0.74rem; color: var(--sage-deep); background: rgba(107, 143, 113, 0.14); border-radius: 999px; padding: 0.15rem 0.5rem; white-space: nowrap; }
+   
+   .flow__libgrid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem; }
+   .flow__libcard { font-family: var(--body); font-size: 0.9rem; font-weight: 600; color: var(--ink); background: var(--surface); border: 1px solid var(--ink-12); border-radius: 10px; padding: 0.5rem 0.85rem; }
+   .flow__libcard:hover { border-color: var(--sage); color: var(--sage-deep); }
+   .flow__librow { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.45rem; }
+   .flow__libname { flex: 1; text-align: left; font-family: var(--body); font-size: 0.92rem; color: var(--sage-deep); background: var(--surface); border: 1px solid var(--ink-12); border-radius: 8px; padding: 0.45rem 0.7rem; }
+   .flow__libname:hover { background: rgba(107, 143, 113, 0.1); }
+   
+   /* canvas — landscape, roomy */
+   .flow__wrap { height: 76vh; min-height: 560px; border: 1px solid var(--ink-12); border-radius: 14px; overflow: hidden; background: var(--cream); }
+   .flow__hint { margin-top: 0.8rem; font-size: 0.85rem; }
+   
+   /* ---------- nodes ---------- */
+   .fnode { width: 250px; background: var(--surface); border: 1px solid var(--ink-12); border-radius: 12px; padding: 0.7rem 0.8rem 0.8rem; box-shadow: 0 6px 18px rgba(30, 51, 42, 0.08); font-family: var(--body); transition: box-shadow 0.2s, border-color 0.2s; }
+   .fnode--input { border-color: rgba(30, 51, 42, 0.25); }
+   .fnode--running-b { border-color: var(--sage); box-shadow: 0 0 0 3px rgba(107, 143, 113, 0.22), 0 6px 18px rgba(30, 51, 42, 0.08); }
+   
+   .fnode__head { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem; }
+   .fnode__type { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; border-radius: 5px; padding: 0.15rem 0.4rem; }
+   .fnode__type--input { background: var(--ink); }
+   .fnode__type--fetch { background: var(--peach); }
+   .fnode__type--llm { background: var(--sage); }
+   .fnode__type--template { background: var(--ink); }
+   
+   .fnode__name { flex: 1; font-family: var(--body); font-weight: 600; font-size: 0.88rem; color: var(--ink); background: var(--cream); border: 1px solid var(--ink-12); border-radius: 7px; padding: 0.25rem 0.45rem; min-width: 0; }
+   .fnode__name:focus { outline: none; border-color: var(--sage); }
+   
+   .fnode__info { position: relative; display: inline-flex; }
+   .fnode__infobtn { width: 18px; height: 18px; border-radius: 50%; font-size: 0.72rem; font-weight: 700; font-style: italic; color: var(--ink-70); background: var(--ink-07); line-height: 1; }
+   .fnode__infobtn:hover { background: var(--ink-12); color: var(--ink); }
+   .fnode__infobox { position: absolute; top: 24px; right: 0; z-index: 20; width: 230px; max-height: 200px; overflow: auto; background: var(--ink); color: var(--cream); font-size: 0.8rem; line-height: 1.5; border-radius: 10px; padding: 0.6rem 0.7rem; box-shadow: 0 8px 24px rgba(30, 51, 42, 0.25); }
+   
+   .fnode__model { width: 100%; font-family: var(--body); font-size: 0.8rem; color: var(--ink); background: var(--cream); border: 1px solid var(--ink-12); border-radius: 8px; padding: 0.35rem 0.45rem; margin-bottom: 0.4rem; }
+   .fnode__model:focus { outline: none; border-color: var(--sage); }
+   
+   .fnode__field { width: 100%; font-family: var(--body); font-size: 0.82rem; color: var(--ink); background: var(--cream); border: 1px solid var(--ink-12); border-radius: 8px; padding: 0.4rem 0.5rem; margin-bottom: 0.4rem; resize: vertical; line-height: 1.45; }
+   .fnode__field:focus { outline: none; border-color: var(--sage); }
+   .fnode__ref { font-size: 0.72rem; color: var(--ink-50); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+   
+   .fnode__running { margin-top: 0.5rem; font-size: 0.8rem; color: var(--sage-deep); font-weight: 600; }
+   .fnode__running::after { content: ''; display: inline-block; width: 7px; height: 7px; margin-left: 6px; border-radius: 50%; background: var(--sage); animation: fmpulse 0.9s ease-in-out infinite; vertical-align: middle; }
+   @keyframes fmpulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+   
+   .fnode__resultwrap { position: relative; }
+   .fnode__result { margin-top: 0.5rem; max-height: 150px; overflow: auto; background: var(--cream-deep); border: 1px solid var(--ink-07); border-radius: 8px; padding: 0.5rem 0.6rem; font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap; }
+   .fnode__result--err { color: var(--clay); background: rgba(201, 123, 90, 0.08); }
+   .fnode__copy { font-size: 0.72rem; font-weight: 600; color: var(--sage-deep); background: rgba(107, 143, 113, 0.16); border-radius: 6px; padding: 0.2rem 0.5rem; margin-top: 0.35rem; }
+   .fnode__copy:hover { background: rgba(107, 143, 113, 0.28); }
+   
+   .react-flow__handle { width: 10px; height: 10px; background: var(--sage); border: 2px solid var(--surface); }
+   .react-flow__edge-path { stroke: var(--sage); stroke-width: 2; }

@@ -8,7 +8,8 @@ const agentRouter = require('./agent');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN; // e.g. https://fmsoftware.ie  (comma-separated for several)
+app.use(cors(ALLOWED_ORIGIN ? { origin: ALLOWED_ORIGIN.split(',').map((o) => o.trim()) } : {}));
 app.use(express.json({ limit: '1mb' }));
 
 // Admin auth + internal tools (login, /me, /draft)
