@@ -80,6 +80,7 @@ const CSS = `
   .nav__link{font-size:.93rem;color:var(--ink-70);text-decoration:none;padding:.42rem .85rem;border-radius:999px}
   .nav__link:hover{color:var(--ink);background:var(--ink-07)}
   .nav__link--on{color:#fff;background:var(--sage)}
+  @media (max-width:760px){.nav__link--mid{display:none}}
   .nav__cta{font-weight:700;font-size:.9rem;color:#fff;background:var(--sage);border-radius:999px;padding:.55rem 1.15rem;text-decoration:none;white-space:nowrap}
   .nav__cta:hover{background:var(--sage-deep)}
 
@@ -110,14 +111,14 @@ const CSS = `
   .postcard{display:block;background:var(--surface);border:1px solid var(--ink-12);border-radius:16px;overflow:hidden;
     text-decoration:none;color:var(--ink);margin-top:1.3rem;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
   .postcard:hover{transform:translateY(-4px);border-color:var(--sage);box-shadow:0 4px 8px rgba(30,51,42,.05),0 18px 42px rgba(30,51,42,.12)}
-  .postcard__bar{display:flex;align-items:center;gap:.6rem;padding:.55rem .95rem;background:linear-gradient(135deg,#6B8F71,#54775B);color:#EAF4EC}
-  .postcard__dots{display:flex;gap:5px}.postcard__dots i{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.55}
+  .postcard__bar{display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;background:linear-gradient(135deg,#6B8F71,#54775B);color:#EAF4EC}
+  .postcard__dots{display:flex;gap:5px;flex:none}.postcard__dots i{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.55}
   .postcard__url{font-size:.74rem;font-family:ui-monospace,Menlo,monospace;opacity:.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .postcard__body{padding:1.15rem 1.35rem 1.3rem}
-  .postcard__meta{font-size:.8rem;color:var(--ink-50);display:flex;gap:.55rem;align-items:center}
-  .postcard h2{font-family:var(--display);font-weight:600;font-size:1.35rem;line-height:1.25;margin:.45rem 0 .45rem}
-  .postcard p{color:var(--ink-70);font-size:.97rem}
-  .postcard__read{display:inline-block;margin-top:.8rem;font-weight:700;font-size:.9rem;color:var(--sage-deep)}
+  .postcard__body{display:block;padding:1.3rem 1.45rem 1.4rem}
+  .postcard__meta{font-size:.82rem;color:var(--ink-50);margin-bottom:.55rem}
+  .postcard h2{font-family:var(--display);font-weight:600;font-size:1.35rem;line-height:1.28;margin:0 0 .55rem}
+  .postcard p{color:var(--ink-70);font-size:.97rem;margin:0}
+  .postcard__read{display:inline-block;margin-top:.95rem;font-weight:700;font-size:.9rem;color:var(--sage-deep)}
   .postcard:hover .postcard__read{text-decoration:underline}
 
   /* article typography */
@@ -183,7 +184,11 @@ const NAV = (active) => `
   <nav class="nav">
     <a class="nav__brand" href="/">FM<span>·</span>Software</a>
     <div class="nav__links">
-      <a class="nav__link" href="/">Home</a>
+      <a class="nav__link" href="/#home">Home</a>
+      <a class="nav__link nav__link--mid" href="/#services">What I Build</a>
+      <a class="nav__link nav__link--mid" href="/#work">Work</a>
+      <a class="nav__link nav__link--mid" href="/#studio">The Studio</a>
+      <a class="nav__link nav__link--mid" href="/#contact">Contact</a>
       <a class="nav__link ${active === 'blog' ? 'nav__link--on' : ''}" href="/blog/">Blog</a>
     </div>
     <a class="nav__cta" href="/#contact">Start a project</a>
@@ -280,13 +285,13 @@ const indexBody = `
   <main class="wrap">
     ${posts.map((p, i) => `
     <a class="postcard rise" style="animation-delay:${0.08 + i * 0.07}s" href="/blog/${p.slug}/">
-      <span class="postcard__bar"><span class="postcard__dots"><i></i><i></i><i></i></span><span class="postcard__url">fmsoftware.ie/blog/${p.slug}</span></span>
-      <span class="postcard__body">
-        <span class="postcard__meta">${fmtDate(p.date)} · ${p.mins} min read</span>
+      <div class="postcard__bar"><span class="postcard__dots"><i></i><i></i><i></i></span><span class="postcard__url">fmsoftware.ie/blog/${p.slug}</span></div>
+      <div class="postcard__body">
+        <div class="postcard__meta">${fmtDate(p.date)} · ${p.mins} min read</div>
         <h2>${p.title}</h2>
         <p>${p.description}</p>
         <span class="postcard__read">Read the note →</span>
-      </span>
+      </div>
     </a>`).join('\n') || '<p style="color:rgba(30,51,42,.55)">First notes landing soon.</p>'}
   </main>
   ${FOOTER}`;

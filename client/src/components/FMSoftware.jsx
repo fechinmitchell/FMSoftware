@@ -562,7 +562,7 @@ export default function FMSoftware() {
 
       <main>
         {/* -------- Hero -------- */}
-        <section ref={(el) => (sectionRefs.current.home = el)} className="hero">
+        <section id="home" ref={(el) => (sectionRefs.current.home = el)} className="hero">
           <HeroLandscape />
           <div className="hero__inner">
             <p className="hero__eyebrow" data-reveal>
@@ -596,7 +596,7 @@ export default function FMSoftware() {
         </section>
 
         {/* -------- Services: three equal lanes -------- */}
-        <section ref={(el) => (sectionRefs.current.services = el)} className="section services">
+        <section id="services" ref={(el) => (sectionRefs.current.services = el)} className="section services">
           <Divider />
           <div className="container">
             <p className="eyebrow" data-reveal>What I build</p>
@@ -632,7 +632,7 @@ export default function FMSoftware() {
         </section>
 
         {/* -------- Work -------- */}
-        <section ref={(el) => (sectionRefs.current.work = el)} className="section work">
+        <section id="work" ref={(el) => (sectionRefs.current.work = el)} className="section work">
           <Divider flip />
           <div className="container">
             <p className="eyebrow" data-reveal>Selected work</p>
@@ -748,7 +748,7 @@ export default function FMSoftware() {
         </section>
 
         {/* -------- Studio -------- */}
-        <section ref={(el) => (sectionRefs.current.studio = el)} className="section studio">
+        <section id="studio" ref={(el) => (sectionRefs.current.studio = el)} className="section studio">
           <Divider />
           <div className="container studio__grid">
             <div className="studio__story">
@@ -802,7 +802,7 @@ export default function FMSoftware() {
         </section>
 
         {/* -------- Contact -------- */}
-        <section ref={(el) => (sectionRefs.current.contact = el)} className="section contact">
+        <section id="contact" ref={(el) => (sectionRefs.current.contact = el)} className="section contact">
           <Divider flip />
           <div className="container contact__grid">
             <div>
