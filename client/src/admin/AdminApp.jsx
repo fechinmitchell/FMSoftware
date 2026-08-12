@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './AdminApp.css';
 import AgentHQ from './hq/AgentHQ';
 import LibraryPage from './hq/LibraryPage';
+import StatsPage from './hq/StatsPage';
 import FlowBuilder from './FlowBuilder';
 
 const API = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
@@ -87,9 +88,10 @@ function Login({ onSignIn }) {
 /*  Dashboard — Agent HQ is home; Agent Flow stays as the power tool  */
 /* ------------------------------------------------------------------ */
 const TOOLS = [
-  { id: 'hq', label: 'Agent HQ' },
-  { id: 'outputs', label: 'Outputs' },
-  { id: 'flow', label: 'Agent Flow' },
+  { id: 'hq', label: 'Agent HQ', icon: '🏯' },
+  { id: 'outputs', label: 'Outputs', icon: '📤' },
+  { id: 'stats', label: 'Stats', icon: '📈' },
+  { id: 'flow', label: 'Agent Flow', icon: '🧩' },
 ];
 
 function Dashboard({ token, onSignOut }) {
@@ -97,7 +99,7 @@ function Dashboard({ token, onSignOut }) {
   return (
     <div className="admin">
       <header className="admin__bar">
-        <div className="admin__brand">FM<span>·</span>Software</div>
+        <div className="admin__brand">FM<span>·</span>Software<em className="admin__brandsub">studio tools</em></div>
         <nav className="admin__tabs">
           {TOOLS.map((t) => (
             <button
@@ -105,7 +107,7 @@ function Dashboard({ token, onSignOut }) {
               className={`admin__tab ${tool === t.id ? 'admin__tab--on' : ''}`}
               onClick={() => setTool(t.id)}
             >
-              {t.label}
+              <span className="admin__tabicon">{t.icon}</span>{t.label}
             </button>
           ))}
         </nav>
@@ -114,6 +116,7 @@ function Dashboard({ token, onSignOut }) {
       <main className="admin__main admin__main--wide">
         {tool === 'hq' && <AgentHQ token={token} />}
         {tool === 'outputs' && <LibraryPage token={token} />}
+        {tool === 'stats' && <StatsPage token={token} />}
         {tool === 'flow' && (
           <section className="admin__card">
             <div className="admin__toolhead">
