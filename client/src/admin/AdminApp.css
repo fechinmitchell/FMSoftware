@@ -87,16 +87,19 @@
   .admin__link:hover { color: var(--ink); border-color: var(--sage); background: rgba(107, 143, 113, 0.08); }
 
   /* ---------- tabs ---------- */
+  /* pinned to the true centre of the bar, independent of brand/sign-out widths */
   .admin__tabs {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     gap: 0.3rem;
-    flex: 1;
-    justify-content: center;
     background: var(--ink-07);
     border-radius: 999px;
     padding: 0.25rem;
-    max-width: fit-content;
-    margin: 0 auto;
+  }
+  @media (max-width: 940px) {
+    .admin__tabs { position: static; transform: none; flex: 1; justify-content: center; max-width: fit-content; margin: 0 auto; }
   }
   .admin__tab {
     font-family: var(--body);
