@@ -553,6 +553,7 @@ export default function FMSoftware() {
               {label}
             </button>
           ))}
+          <a className="nav__link" href="/blog/">Blog</a>
         </div>
         <button className="nav__cta" onClick={() => scrollTo("contact")}>
           Start a project
@@ -865,6 +866,7 @@ export default function FMSoftware() {
           <footer className="footer">
             <p>© 2026 FM Software · Fechín Mitchell · Galway, Ireland</p>
             <div className="footer__links">
+              <a href="/blog/">Blog</a>
               <a href="https://github.com/fechinmitchell" target="_blank" rel="noopener noreferrer">GitHub</a>
               <a href="https://www.linkedin.com/in/fech%C3%ADn-mitchell/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a href="https://www.fechinmitchell.com" target="_blank" rel="noopener noreferrer">fechinmitchell.com</a>

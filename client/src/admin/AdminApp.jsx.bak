@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import './AdminApp.css';
-import AgentHQ from './hq/AgentHQ';
-import LibraryPage from './hq/LibraryPage';
+import MissionControl from './MissionControl';
 import FlowBuilder from './FlowBuilder';
+import RunsPage from './RunsPage';
 
 const API = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 const TOKEN_KEY = 'fm_admin_token';
@@ -84,16 +84,16 @@ function Login({ onSignIn }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Dashboard — Agent HQ is home; Agent Flow stays as the power tool  */
+/*  Dashboard                                                         */
 /* ------------------------------------------------------------------ */
 const TOOLS = [
-  { id: 'hq', label: 'Agent HQ' },
-  { id: 'outputs', label: 'Outputs' },
+  { id: 'command', label: 'Command Center' },
   { id: 'flow', label: 'Agent Flow' },
+  { id: 'runs', label: 'Run Agent' },
 ];
 
 function Dashboard({ token, onSignOut }) {
-  const [tool, setTool] = useState('hq');
+  const [tool, setTool] = useState('command');
   return (
     <div className="admin">
       <header className="admin__bar">
@@ -111,9 +111,9 @@ function Dashboard({ token, onSignOut }) {
         </nav>
         <button className="admin__link" onClick={onSignOut}>Sign out</button>
       </header>
-      <main className="admin__main admin__main--wide">
-        {tool === 'hq' && <AgentHQ token={token} />}
-        {tool === 'outputs' && <LibraryPage token={token} />}
+      <main className={`admin__main ${(tool === 'flow' || tool === 'command') ? 'admin__main--wide' : ''}`}>
+        {tool === 'command' && <MissionControl token={token} />}
+        {tool === 'runs' && <RunsPage token={token} />}
         {tool === 'flow' && (
           <section className="admin__card">
             <div className="admin__toolhead">
