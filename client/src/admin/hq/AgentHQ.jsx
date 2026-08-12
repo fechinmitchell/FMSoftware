@@ -178,19 +178,31 @@ function CostModal({ hq, onClose }) {
 /* ------------------------------------------------------------------ */
 /*  Approvals                                                          */
 /* ------------------------------------------------------------------ */
+function ApprovalActions({ item, busy, onApprove, onReject }) {
+  const [note, setNote] = useState('');
+  return (
+    <div className="hq-approval__actions">
+      <input className="admin__input hq-approval__note"
+        placeholder="optional note — what could be better next time? feeds kaizen.md"
+        value={note} onChange={(e) => setNote(e.target.value)} />
+      <button className="hq-quick__btn hq-quick__btn--run" disabled={busy} onClick={() => onApprove(item, note.trim())}>
+        {busy ? 'Publishing…' : item.kind === 'blogPost' ? '✓ Approve & publish' : '✓ Approve'}
+      </button>
+      <button className="hq-quick__btn hq-quick__btn--rej" disabled={busy} onClick={() => onReject(item, note.trim())}>✕ Reject</button>
+    </div>
+  );
+}
+
 function ApprovalsModal({ hq, onClose }) {
   const [busyId, setBusyId] = useState(null);
-  const [noteFor, setNoteFor] = useState(null);
-  const [note, setNote] = useState('');
   const items = hq.state.approvals;
 
-  async function doApprove(item) {
+  async function doApprove(item, note) {
     setBusyId(item.id);
-    try { await hq.approve(item.id); } catch {} finally { setBusyId(null); }
+    try { await hq.approve(item.id, note); } catch {} finally { setBusyId(null); }
   }
-  function doReject(item) {
-    hq.reject(item.id, note.trim());
-    setNoteFor(null); setNote('');
+  function doReject(item, note) {
+    hq.reject(item.id, note);
   }
 
   return (
@@ -199,7 +211,7 @@ function ApprovalsModal({ hq, onClose }) {
         <div className="modal__head">
           <div>
             <h3 className="admin__title">📥 Approvals</h3>
-            <p className="admin__muted">What the Kensei wants your call on. Rejection notes teach the agents.</p>
+            <p className="admin__muted">What the Kensei wants your call on. Notes on approve OR reject go into kaizen.md — even a good post can teach the agent something.</p>
           </div>
           <button className="modal__close" onClick={onClose}>×</button>
         </div>
@@ -215,19 +227,7 @@ function ApprovalsModal({ hq, onClose }) {
             {item.status === 'pending' && (
               <>
                 <pre className="hq-approval__body">{item.body}</pre>
-                <div className="hq-approval__actions">
-                  <button className="hq-quick__btn hq-quick__btn--run" disabled={busyId === item.id} onClick={() => doApprove(item)}>
-                    {busyId === item.id ? 'Publishing…' : item.kind === 'blogPost' ? '✓ Approve & publish' : '✓ Approve'}
-                  </button>
-                  {noteFor === item.id ? (
-                    <>
-                      <input className="admin__input hq-approval__note" placeholder="why? this teaches the agent" value={note} onChange={(e) => setNote(e.target.value)} autoFocus />
-                      <button className="hq-quick__btn hq-quick__btn--rej" onClick={() => doReject(item)}>Reject</button>
-                    </>
-                  ) : (
-                    <button className="hq-quick__btn hq-quick__btn--rej" onClick={() => setNoteFor(item.id)}>✕ Reject…</button>
-                  )}
-                </div>
+                <ApprovalActions item={item} busy={busyId === item.id} onApprove={doApprove} onReject={doReject} />
               </>
             )}
             {item.status === 'published' && item.url && <a className="hq-approval__link" href={item.url} target="_blank" rel="noreferrer">view commit ↗</a>}
@@ -235,7 +235,7 @@ function ApprovalsModal({ hq, onClose }) {
               <>
                 <p className="admin__error">Publish failed: {item.note}</p>
                 <div className="hq-approval__actions">
-                  <button className="hq-quick__btn hq-quick__btn--run" disabled={busyId === item.id} onClick={() => doApprove(item)}>
+                  <button className="hq-quick__btn hq-quick__btn--run" disabled={busyId === item.id} onClick={() => doApprove(item, '')}>
                     {busyId === item.id ? 'Publishing…' : '↻ Retry publish'}
                   </button>
                 </div>

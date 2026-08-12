@@ -432,10 +432,11 @@ export default function useHqStore(token) {
     return r;
   }, [token]);
 
-  const approve = useCallback(async (itemId) => {
+  const approve = useCallback(async (itemId, note = '') => {
     const item = stateRef.current.approvals.find((x) => x.id === itemId);
     if (!item) return;
-    appendMasterKaizen(`approved: ${item.kind} "${item.title}" — this category tends to be fine`);
+    appendMasterKaizen(`approved: ${item.kind} "${item.title}"${note ? ` — note: ${note}` : ' — this category tends to be fine'}`);
+    if (note) appendKaizen(item.agentId, `the boss approved "${item.title}" but wants better next time: ${note}`);
     if (item.kind === 'blogPost') {
       try { await publishBlog(item); }
       catch (err) {
@@ -445,7 +446,7 @@ export default function useHqStore(token) {
     } else {
       setState((s) => ({ ...s, approvals: s.approvals.map((x) => (x.id === itemId ? { ...x, status: 'approved' } : x)) }));
     }
-  }, [appendMasterKaizen, publishBlog]);
+  }, [appendMasterKaizen, appendKaizen, publishBlog]);
 
   const reject = useCallback((itemId, note) => {
     const item = stateRef.current.approvals.find((x) => x.id === itemId);
