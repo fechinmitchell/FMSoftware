@@ -309,6 +309,11 @@ router.post('/blog/publish', requireAuth, async (req, res) => {
   if (!token || !repo) return res.status(500).json({ error: 'Set GITHUB_TOKEN and GITHUB_REPO on the server to publish.' });
   const safeSlug = String(slug || title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   if (!safeSlug || !markdown.trim()) return res.status(400).json({ error: 'Post needs a slug and a body.' });
+  // stamp the publish date into the frontmatter so it never shifts on rebuilds
+  let md = markdown;
+  if (/^---\s*\n[\s\S]*?\n---/.test(md) && !/^date:/m.test(md.split('---')[1] || '')) {
+    md = md.replace(/^---\s*\n/, `---\ndate: ${new Date().toISOString().slice(0, 10)}\n`);
+  }
   const path = `client/blog/${safeSlug}.md`;
   const api = `https://api.github.com/repos/${repo}/contents/${path}`;
   const headers = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'fmsoftware-hq' };
@@ -320,7 +325,7 @@ router.post('/blog/publish', requireAuth, async (req, res) => {
       method: 'PUT', headers,
       body: JSON.stringify({
         message: `blog: ${title || safeSlug}`,
-        content: Buffer.from(markdown, 'utf8').toString('base64'),
+        content: Buffer.from(md, 'utf8').toString('base64'),
         branch, ...(sha ? { sha } : {}),
       }),
     });
