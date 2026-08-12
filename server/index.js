@@ -5,6 +5,7 @@ const cors = require('cors');
 const { router: adminRouter } = require('./auth');
 const agentRouter = require('./agent');
 const hqRouter = require('./hq');
+const statsRouter = require('./stats');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,9 @@ app.use('/api/admin/workflow', agentRouter);
 
 // Agent HQ (route / kaizen / improve / build / blog publish)
 app.use('/api/admin/hq', hqRouter);
+
+// Visit stats (public beacon + auth'd summary)
+app.use('/api/stats', statsRouter);
 
 // Contact form endpoint
 app.post('/api/contact', (req, res) => {

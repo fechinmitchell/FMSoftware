@@ -192,3 +192,15 @@
    .hq-lib__orig > summary { cursor: pointer; font-size: 0.84rem; font-weight: 600; color: var(--ink-50); }
    .hq-lib__orig > summary:hover { color: var(--ink); }
    .hq-lib__outhead { display: flex; justify-content: flex-end; margin: 0.4rem 0 0.2rem; }
+   
+   /* ---------- Stats page ---------- */
+   .hq-statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.2rem; margin: 1.4rem 0 1.2rem; }
+   .hq-stattablewrap { background: var(--cream); border: 1px solid var(--ink-12); border-radius: 12px; padding: 0.9rem 1rem; }
+   .hq-statkey { max-width: 46%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.86rem; }
+   .hq-recent { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.4rem; max-height: 340px; overflow-y: auto; }
+   .hq-recentrow { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; background: var(--cream); border: 1px solid var(--ink-07); border-radius: 9px; padding: 0.4rem 0.65rem; }
+   .hq-recentwhen { color: var(--ink-50); font-variant-numeric: tabular-nums; flex: none; }
+   .hq-recentpath { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: ui-monospace, Menlo, monospace; font-size: 0.8rem; }
+   .hq-recentgeo { margin-left: auto; flex: none; color: var(--sage-deep); font-weight: 700; font-size: 0.8rem; }
+   .hq-recentref { flex: none; color: var(--ink-50); font-size: 0.78rem; }
+   .hq-botbadge { margin-left: auto; flex: none; font-size: 0.72rem; font-weight: 700; color: var(--clay); background: rgba(201, 123, 90, 0.14); border-radius: 999px; padding: 0.12rem 0.5rem; }

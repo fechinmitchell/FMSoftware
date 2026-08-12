@@ -455,6 +455,19 @@ export default function FMSoftware() {
     };
   }, [quickView, closeQuickView]);
 
+  /* Visit beacon → the Stats page in /tools (fire once, never block) */
+  useEffect(() => {
+    const API = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+    try {
+      fetch(`${API}/api/stats/hit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ path: window.location.pathname || "/", ref: document.referrer }),
+        keepalive: true,
+      }).catch(() => {});
+    } catch {}
+  }, []);
+
   /* Track active section + timeline draw progress */
   useEffect(() => {
     let ticking = false;

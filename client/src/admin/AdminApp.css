@@ -21,7 +21,9 @@
     --shadow: 0 2px 4px rgba(30, 51, 42, 0.04), 0 14px 36px rgba(30, 51, 42, 0.08);
   
     min-height: 100vh;
-    background: var(--cream);
+    background:
+      radial-gradient(1100px 380px at 50% -140px, #FFFDF8 0%, rgba(255, 253, 248, 0) 70%),
+      var(--cream);
     color: var(--ink);
     font-family: var(--body);
   }
@@ -38,53 +40,96 @@
     font-weight: 600;
     font-size: 1.1rem;
     letter-spacing: 0.2px;
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    white-space: nowrap;
   }
   .admin__brand span { color: var(--sage); margin: 0 1px; }
-  
+  .admin__brandsub {
+    font-family: var(--body);
+    font-style: normal;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-50);
+  }
+  @media (max-width: 700px) { .admin__brandsub { display: none; } }
+
   /* ---------- top bar ---------- */
   .admin__bar {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 30;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.9rem 1.5rem;
-    background: rgba(250, 246, 240, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    padding: 0.85rem clamp(1rem, 3vw, 2rem);
+    background: rgba(250, 246, 240, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--ink-07);
+    box-shadow: 0 6px 22px rgba(30, 51, 42, 0.05);
   }
   .admin__link {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: var(--ink-70);
-    padding: 0.4rem 0.6rem;
+    padding: 0.42rem 0.95rem;
     border-radius: 999px;
+    border: 1px solid var(--ink-12);
+    background: var(--surface);
+    transition: color 0.15s, background 0.15s, border-color 0.15s;
+    white-space: nowrap;
   }
-  .admin__link:hover { color: var(--ink); background: var(--ink-07); }
-  
+  .admin__link:hover { color: var(--ink); border-color: var(--sage); background: rgba(107, 143, 113, 0.08); }
+
   /* ---------- tabs ---------- */
-  .admin__tabs { display: flex; gap: 0.4rem; flex: 1; justify-content: center; }
+  .admin__tabs {
+    display: flex;
+    gap: 0.3rem;
+    flex: 1;
+    justify-content: center;
+    background: var(--ink-07);
+    border-radius: 999px;
+    padding: 0.25rem;
+    max-width: fit-content;
+    margin: 0 auto;
+  }
   .admin__tab {
     font-family: var(--body);
     font-size: 0.92rem;
+    font-weight: 600;
     color: var(--ink-70);
-    padding: 0.4rem 0.85rem;
+    padding: 0.45rem 1rem;
     border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
   }
-  .admin__tab:hover { background: var(--ink-07); }
+  .admin__tabicon { font-size: 0.95em; line-height: 1; }
+  .admin__tab:hover { background: rgba(255, 255, 255, 0.7); color: var(--ink); }
   .admin__tab--on {
     color: #fff;
     background: var(--sage);
+    box-shadow: 0 3px 10px rgba(107, 143, 113, 0.35);
   }
-  .admin__tab--on:hover { background: var(--sage-deep); }
-  
+  .admin__tab--on:hover { background: var(--sage-deep); color: #fff; }
+  @media (max-width: 820px) {
+    .admin__tab { padding: 0.45rem 0.7rem; font-size: 0.86rem; }
+    .admin__tabicon { display: none; }
+  }
+
   /* ---------- layout ---------- */
   .admin__main {
+    width: 100%;
     max-width: 760px;
     margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
+    padding: 2.2rem clamp(1rem, 2.5vw, 1.5rem) 4.5rem;
   }
   .admin__main--wide { max-width: 1240px; }
   
@@ -96,7 +141,12 @@
     box-shadow: var(--shadow);
     padding: 1.6rem;
   }
-  .admin__login { width: min(380px, 92vw); text-align: left; }
+  .admin__login {
+    width: min(390px, 92vw);
+    text-align: left;
+    border-top: 4px solid var(--sage);
+    padding: 1.8rem 1.8rem 1.9rem;
+  }
   .admin__login .admin__brand { margin-bottom: 1.2rem; }
   
   .admin__title {

@@ -18,6 +18,7 @@ const root = dirname(dirname(fileURLToPath(import.meta.url))); // client/
 const BLOG_DIR = join(root, 'blog');
 const OUT_DIR = join(root, 'public', 'blog');
 const SITE = 'https://fmsoftware.ie';
+const STATS_API = 'https://fmsoftware-server.onrender.com'; // the Render backend
 
 /* ---------------- markdown ---------------- */
 function parse(md) {
@@ -224,6 +225,25 @@ const SHELL = ({ title, description, canonical, body, type = 'article' }) => `<!
 </head>
 <body>
 ${body}
+<script>
+(function(){
+  var API='${STATS_API}';
+  try{
+    fetch(API+'/api/stats/hit',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({path:location.pathname,ref:document.referrer}),keepalive:true});
+  }catch(e){}
+  try{
+    if(document.querySelector('[data-views]')){
+      fetch(API+'/api/stats/blogviews').then(function(r){return r.json()}).then(function(d){
+        document.querySelectorAll('[data-views]').forEach(function(el){
+          var n=(d.views||{})[el.getAttribute('data-views')];
+          if(n) el.textContent=' · '+n+' view'+(n===1?'':'s');
+        });
+      }).catch(function(){});
+    }
+  }catch(e){}
+})();
+</script>
 </body>
 </html>`;
 
@@ -247,7 +267,7 @@ if (existsSync(BLOG_DIR)) {
           <p class="eyebrow">Notes from the studio</p>
           <h1>${p.title}</h1>
           ${p.description ? `<p class="lead">${p.description}</p>` : ''}
-          <p class="postmeta"><b>${fmtDate(date)}</b> · ${mins} min read · FM Software, Galway</p>
+          <p class="postmeta"><b>${fmtDate(date)}</b> · ${mins} min read · FM Software, Galway<span data-views="/blog/${slug}/"></span></p>
         </div>
       </header>
       ${DIVIDER}
@@ -287,7 +307,7 @@ const indexBody = `
     <a class="postcard rise" style="animation-delay:${0.08 + i * 0.07}s" href="/blog/${p.slug}/">
       <div class="postcard__bar"><span class="postcard__dots"><i></i><i></i><i></i></span><span class="postcard__url">fmsoftware.ie/blog/${p.slug}</span></div>
       <div class="postcard__body">
-        <div class="postcard__meta">${fmtDate(p.date)} · ${p.mins} min read</div>
+        <div class="postcard__meta">${fmtDate(p.date)} · ${p.mins} min read<span data-views="/blog/${p.slug}/"></span></div>
         <h2>${p.title}</h2>
         <p>${p.description}</p>
         <span class="postcard__read">Read the note →</span>
